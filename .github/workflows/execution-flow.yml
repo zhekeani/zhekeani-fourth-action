@@ -38,7 +38,9 @@ jobs:
         run: npm run test
 
       - name: Upload test report
-        if: steps.run-tests.outcome == 'failure'
+        # failure() return true if any previous steps failed
+        # because of the we need to specify the failure on specific step
+        if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
           name: test-report
