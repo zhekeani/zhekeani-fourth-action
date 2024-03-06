@@ -73,9 +73,12 @@ jobs:
         with:
           name: dist-files
           path: dist
+
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
+    with:
+      artifact-name: dist-files
 
   report:
     # Only can check whether other jobs fail
